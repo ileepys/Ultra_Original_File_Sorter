@@ -17,7 +17,8 @@ class extention():
 
 
 def sort():
-
+    global item_path_dict
+    item_path_dict = {}
 
     is_path_valid = False
     while not is_path_valid:
@@ -49,27 +50,33 @@ def sort():
 
         if not is_file_dir and (file_extention == "png" or file_extention == "jpg" or file_extention == "gif"):
             move(f"{dir_path}/{file}", f"{dir_path}/Pictures")
+            item_path_dict[file] = "Pictures"
 
         elif not is_file_dir and (file_extention == "mp4" or file_extention == "mov" or file_extention == "mkv"):
             move(f"{dir_path}/{file}", f"{dir_path}/Videos")
+            item_path_dict[file] = "Videos"
 
         elif not is_file_dir and (file_extention == "txt" or file_extention == "py" or file_extention == "html"):
             move(f"{dir_path}/{file}", f"{dir_path}/Text_Files")
+            item_path_dict[file] = "Text_Files"
 
         elif not is_file_dir:
             move(f"{dir_path}/{file}", f"{dir_path}/etc")
+            item_path_dict[file] = "etc"
+
+
+def items_search():
+    while True:
+        item_keys_values = item_path_dict
+        item = input("input file name here (include extention)")
+        if item in item_keys_values:
+            print(item_keys_values[item])
+        elif item == "break":
+            break
+        else:
+            print("couldn't find item")
+
+
 
 sort()
-
-
-
-
-
-
-
-
-
-
-
-
-
+items_search()
